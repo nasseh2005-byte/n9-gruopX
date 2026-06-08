@@ -6,12 +6,24 @@ const products = [
   { icon: '🧠', title: 'N9 AI', desc: 'طبقة ذكاء مستقبلية لتقديم التحليلات والتوصيات والمساعدة الذكية.' },
 ];
 
+const pillars = [
+  'واجهة فاخرة داكنة مستوحاة من أنظمة التصميم الحديثة',
+  'محتوى يشرح سبب بناء الموقع: منصة واحدة لعرض الهوية، المنتجات، الشركاء، والتنزيلات',
+  'تجربة عالمية تصلح للشركات، العرض المؤسسي، والتوسع المستقبلي',
+];
+
 export default function Home() {
   return (
-    <main>
-      <header className="nav wrap">
-        <div className="brand"><img src="/n9-group-logo.svg" alt="N9 Group" width="44" height="44" style={{ borderRadius: 14 }} /><div><div>N9 Group</div><small style={{ color: 'var(--muted)' }}>Intelligent Digital Systems</small></div></div>
-        <nav>
+    <main className="page-shell">
+      <header className="nav wrap nav-glass">
+        <div className="brand brand-lux">
+          <img src="/n9-group-logo.svg" alt="N9 Group" width="52" height="52" style={{ borderRadius: 16 }} />
+          <div>
+            <div className="brand-title">N9 Group</div>
+            <small style={{ color: 'var(--muted)' }}>Intelligent Digital Systems</small>
+          </div>
+        </div>
+        <nav className="nav-links">
           <a href="/products">المنتجات</a>
           <a href="/downloads">التنزيلات</a>
           <a href="/services">الخدمات</a>
@@ -21,47 +33,53 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="wrap hero">
-        <div>
-          <span className="badge">منصة عالمية ذكية • واجهة مستقبلية • حلول أعمال متقدمة</span>
-          <h1>N9 Group منصة رقمية فاخرة، ذكية، وعالمية.</h1>
-          <p className="lead">موقع متعدد الصفحات مصمم ليعرض المنتجات، الشركاء، التنزيلات، الخدمات، والمعلومات الأساسية في تجربة مؤسسية راقية، مع قابلية توسع كبيرة إلى نظام ويب متكامل.</p>
+      <section className="wrap hero hero-cinematic">
+        <div className="hero-copy">
+          <span className="badge badge-lux">منصة عالمية ذكية • واجهة مستقبلية • حلول أعمال متقدمة</span>
+          <h1>منصة N9 Group صُممت لتبدو مثل نظام تصميم عالمي فخم، لا مجرد موقع عادي.</h1>
+          <p className="lead">
+            هذا الموقع بُني ليجمع هوية المجموعة في مكان واحد: عرض المنتجات، التنزيلات، الشركاء، الخدمات، والتواصل المؤسسي.
+            الهدف أن يشعر الزائر أنه أمام علامة تقنية راقية، حديثة، وذات رؤية مستقبلية.
+          </p>
           <div className="actions">
             <Link data-tech-sound="true" className="btn" href="/products">استعراض المنتجات</Link>
             <Link data-tech-sound="true" className="btn ghost" href="/contact">طلب مشروع Enterprise</Link>
           </div>
-          <div className="grid stats">
-            <div className="stat"><strong>6+</strong><span style={{ color: 'var(--muted)' }}>منتجات وحلول رئيسية</span></div>
-            <div className="stat"><strong>4</strong><span style={{ color: 'var(--muted)' }}>مجالات أعمال أساسية</span></div>
-            <div className="stat"><strong>24/7</strong><span style={{ color: 'var(--muted)' }}>رؤية تشغيلية ذكية</span></div>
-          </div>
           <div className="pill-row">
-            <span className="pill">مخصص للشركات</span>
-            <span className="pill">جاهز للتوسع</span>
-            <span className="pill">تصميم عالمي</span>
-            <span className="pill">واجهة متعددة الصفحات</span>
+            <span className="pill">فخامة</span>
+            <span className="pill">عمق بصري</span>
+            <span className="pill">Dark Premium</span>
+            <span className="pill">Cinematic Motion</span>
           </div>
         </div>
-        <div className="hero-art">
-          <div className="panel float-card" style={{ transform: 'rotateY(-10deg) rotateX(6deg)' }}>
-            <div className="tag">N9 AI Intelligence Core</div>
-            <h3 style={{ margin: '14px 0 8px' }}>رؤية مستقبلية للمجموعة</h3>
-            <p style={{ color: 'var(--muted)' }}>منظومة تدمج القانون، الرسائل، التحليلات، التعلم، والواجهات الذكية في تجربة عالمية موحّدة.</p>
+
+        <div className="hero-art hero-orbit">
+          <div className="panel float-card orbit-card">
+            <div className="orbit-ring orbit-ring-1" />
+            <div className="orbit-ring orbit-ring-2" />
+            <div className="tag tag-lux">N9 AI Intelligence Core</div>
+            <h3 style={{ margin: '14px 0 8px' }}>لماذا هذا الموقع موجود؟</h3>
+            <p style={{ color: 'var(--muted)' }}>
+              لإظهار N9 Group كمنصة موحّدة تضم القانون، المراسلات، الذكاء، والتنزيلات ضمن تجربة فاخرة قابلة للتطوير.
+            </p>
             <div className="grid" style={{ marginTop: 18, gap: 12 }}>
-              <div className="info-item">واجهة داكنة عالية التقنية</div>
-              <div className="info-item">قابلة للتطوير إلى لوحة تحكم ذكية</div>
-              <div className="info-item">جاهزة للربط مع النماذج والتحميلات</div>
+              {pillars.map((item) => (
+                <div className="info-item info-item-lux" key={item}>{item}</div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="wrap" id="products">
-        <div className="section-title"><div><h2>أبرز المنتجات</h2><p>عرض سريع لأقوى الحلول داخل المنظومة.</p></div><Link href="/products">عرض الكل</Link></div>
-        <div className="grid products">
+      <section className="wrap section-block">
+        <div className="section-title">
+          <div><h2>أبرز المنتجات</h2><p>عرض سريع لأقوى الحلول داخل المنظومة.</p></div>
+          <Link href="/products">عرض الكل</Link>
+        </div>
+        <div className="grid products products-lux">
           {products.map((p) => (
-            <article key={p.title} className="product">
-              <div className="icon">{p.icon}</div>
+            <article key={p.title} className="product product-lux">
+              <div className="icon icon-lux">{p.icon}</div>
               <div><h3>{p.title}</h3><p style={{ color: 'var(--muted)' }}>{p.desc}</p></div>
             </article>
           ))}
