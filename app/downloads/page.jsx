@@ -11,8 +11,11 @@ export default function DownloadsPage() {
     <main className="page-shell">
       <section className="wrap" style={{ padding: '56px 0 28px' }}>
         <div className="section-title">
-          <div><h2>التنزيلات</h2><p>روابط ومنصات التحميل ستصبح جاهزة عند تفعيل الإصدارات النهائية.</p></div>
-          <Link href="/contact">تحديث روابط التحميل</Link>
+          <div>
+            <h2>Downloads</h2>
+            <p>روابط التحميل ستظهر هنا عند إصدار النسخ النهائية.</p>
+          </div>
+          <Link href="/contact">تحديث الروابط</Link>
         </div>
         <div className="grid downloads">
           {downloads.map((item) => (
