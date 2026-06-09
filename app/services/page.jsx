@@ -12,7 +12,10 @@ export default function ServicesPage() {
     <main className="page-shell">
       <section className="wrap" style={{ padding: '56px 0 28px' }}>
         <div className="section-title">
-          <div><h2>الخدمات</h2><p>خدمات مصممة لتخدم الشركات والجهات التي تحتاج حضورًا رقميًا قويًا.</p></div>
+          <div>
+            <h2>Services</h2>
+            <p>خدمات مختصرة ومباشرة تخدم الشركات والجهات المؤسسية.</p>
+          </div>
           <Link href="/contact">طلب خدمة</Link>
         </div>
         <div className="grid cards">
