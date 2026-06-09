@@ -52,8 +52,7 @@ export default function AdminPage() {
   const [editingPartnerId, setEditingPartnerId] = useState('');
 
   useEffect(() => {
-    const storedAuth = safeLoad(STORAGE_KEYS.auth, false);
-    setAuthenticated(Boolean(storedAuth));
+    setAuthenticated(Boolean(safeLoad(STORAGE_KEYS.auth, false)));
     setProducts(safeLoad(STORAGE_KEYS.products, initialProducts));
     setPartners(safeLoad(STORAGE_KEYS.partners, initialPartners));
     setHydrated(true);
@@ -75,9 +74,7 @@ export default function AdminPage() {
       setAuthenticated(true);
       setError('');
       setPassword('');
-    } else {
-      setError('كلمة المرور غير صحيحة');
-    }
+    } else setError('كلمة المرور غير صحيحة');
   };
 
   const logout = () => {
@@ -89,10 +86,9 @@ export default function AdminPage() {
     e.preventDefault();
     if (!productForm.name.trim()) return;
     const id = editingProductId || crypto.randomUUID();
-    setProducts((prev) => {
-      const exists = prev.some((item) => item.id === id);
-      return exists ? prev.map((item) => (item.id === id ? { ...productForm, id } : item)) : [...prev, { ...productForm, id }];
-    });
+    setProducts((prev) => prev.some((item) => item.id === id)
+      ? prev.map((item) => (item.id === id ? { ...productForm, id } : item))
+      : [...prev, { ...productForm, id }]);
     setProductForm(blankProduct);
     setEditingProductId('');
   };
@@ -101,18 +97,12 @@ export default function AdminPage() {
     e.preventDefault();
     if (!partnerForm.name.trim()) return;
     const id = editingPartnerId || crypto.randomUUID();
-    setPartners((prev) => {
-      const exists = prev.some((item) => item.id === id);
-      return exists ? prev.map((item) => (item.id === id ? { ...partnerForm, id } : item)) : [...prev, { ...partnerForm, id }];
-    });
+    setPartners((prev) => prev.some((item) => item.id === id)
+      ? prev.map((item) => (item.id === id ? { ...partnerForm, id } : item))
+      : [...prev, { ...partnerForm, id }]);
     setPartnerForm(blankPartner);
     setEditingPartnerId('');
   };
-
-  const startEditProduct = (item) => { setProductForm(item); setEditingProductId(item.id); };
-  const startEditPartner = (item) => { setPartnerForm(item); setEditingPartnerId(item.id); };
-  const removeProduct = (id) => setProducts((prev) => prev.filter((item) => item.id !== id));
-  const removePartner = (id) => setPartners((prev) => prev.filter((item) => item.id !== id));
 
   const resetAll = () => {
     setProducts(initialProducts);
@@ -130,9 +120,9 @@ export default function AdminPage() {
   if (!authenticated) {
     return (
       <main className="page-shell">
-        <section className="wrap" style={{ padding: '90px 0' }}>
-          <div className="card" style={{ maxWidth: 560, margin: '0 auto' }}>
-            <span className="tag tag-lux">Admin Access</span>
+        <section className="wrap" style={{ padding: '80px 0' }}>
+          <div className="card" style={{ maxWidth: 520, margin: '0 auto' }}>
+            <div className="mini-caption">Admin Access</div>
             <h2>قفل لوحة الإدارة</h2>
             <p style={{ color: 'var(--muted)' }}>أدخل كلمة المرور للوصول إلى لوحة الإدارة.</p>
             <form onSubmit={login}>
@@ -150,7 +140,11 @@ export default function AdminPage() {
     <main className="page-shell">
       <section className="wrap" style={{ padding: '56px 0 28px' }}>
         <div className="section-title">
-          <div><h2>لوحة الإدارة الحقيقية</h2><p>إدارة المنتجات والشركاء مع حفظ محلي، تعديل، حذف، وقفل بسيط للحماية.</p></div>
+          <div>
+            <div className="mini-caption">Dashboard</div>
+            <h2>Admin</h2>
+            <p>إدارة المحتوى مع حفظ دائم محليًا وتعديل وحذف فوري.</p>
+          </div>
           <div className="actions" style={{ marginTop: 0 }}>
             <button className="btn ghost" type="button" onClick={logout} data-tech-sound="true">تسجيل خروج</button>
             <button className="btn ghost" type="button" onClick={resetAll} data-tech-sound="true">إعادة الضبط</button>
@@ -158,7 +152,7 @@ export default function AdminPage() {
         </div>
 
         <div className="grid cards" style={{ marginBottom: 18 }}>
-          {stats.map((s) => (<div className="card" key={s.label}><span className="tag tag-lux">{s.label}</span><h3 style={{ marginBottom: 0 }}>{s.value}</h3></div>))}
+          {stats.map((s) => <div className="card" key={s.label}><span className="tag tag-lux">{s.label}</span><h3 style={{ marginBottom: 0 }}>{s.value}</h3></div>)}
         </div>
 
         <div className="contact">
@@ -188,8 +182,8 @@ export default function AdminPage() {
                   <strong>{p.name}</strong>
                   <div style={{ color: 'var(--muted)' }}>{p.status} • {p.category}</div>
                   <div className="pill-row">
-                    <button className="pill" type="button" onClick={() => startEditProduct(p)} data-tech-sound="true">تعديل</button>
-                    <button className="pill" type="button" onClick={() => removeProduct(p.id)} data-tech-sound="true">حذف</button>
+                    <button className="pill" type="button" onClick={() => { setProductForm(p); setEditingProductId(p.id); }} data-tech-sound="true">تعديل</button>
+                    <button className="pill" type="button" onClick={() => setProducts((prev) => prev.filter((item) => item.id !== p.id))} data-tech-sound="true">حذف</button>
                   </div>
                 </div>
               ))}
@@ -204,8 +198,8 @@ export default function AdminPage() {
                   <strong>{p.name}</strong>
                   <div style={{ color: 'var(--muted)' }}>{p.status}</div>
                   <div className="pill-row">
-                    <button className="pill" type="button" onClick={() => startEditPartner(p)} data-tech-sound="true">تعديل</button>
-                    <button className="pill" type="button" onClick={() => removePartner(p.id)} data-tech-sound="true">حذف</button>
+                    <button className="pill" type="button" onClick={() => { setPartnerForm(p); setEditingPartnerId(p.id); }} data-tech-sound="true">تعديل</button>
+                    <button className="pill" type="button" onClick={() => setPartners((prev) => prev.filter((item) => item.id !== p.id))} data-tech-sound="true">حذف</button>
                   </div>
                 </div>
               ))}
