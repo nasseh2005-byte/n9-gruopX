@@ -4,7 +4,12 @@ export default function ContactPage() {
   return (
     <main className="page-shell">
       <section className="wrap" style={{ padding: '56px 0 28px' }}>
-        <div className="section-title"><div><h2>التواصل وطلب مشروع</h2><p>نموذج فعلي بتجربة استخدام مريحة، مع إرسال فوري ورسائل حالة.</p></div></div>
+        <div className="section-title">
+          <div>
+            <h2>Contact</h2>
+            <p>طلب مشروع أو تواصل مباشر.</p>
+          </div>
+        </div>
         <div className="contact">
           <ContactForm />
           <div className="card">
